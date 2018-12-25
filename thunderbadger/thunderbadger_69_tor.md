@@ -39,17 +39,22 @@ Connectez-vous via ssh en tant que admin :
 Les instruction d'installation de Tor se trouve à l'adresse suivante : [https://www.torproject.org/docs/debian.html.en#ubuntu](https://www.torproject.org/docs/debian.html.en#ubuntu)
 
 ```
+# Activez l'utilisateur "root"
+$ sudo su
 # Ajoutez le repo du torproject dans /etc/apt/sources.list
-$ sudo echo 'deb https://deb.torproject.org/torproject.org bionic main' >> /etc/apt/sources.list
-$ sudo echo 'deb-src https://deb.torproject.org/torproject.org bionic main' >> /etc/apt/sources.list
+$ echo 'deb https://deb.torproject.org/torproject.org bionic main' >> /etc/apt/sources.list
+$ echo 'deb-src https://deb.torproject.org/torproject.org bionic main' >> /etc/apt/sources.list
 
 # Afin de pouvoir vérifier l'intégrité des fichiers, nous allons également télécharger les clés du torproject
 $ gpg2 --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
 $ gpg2 --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
 
+# Terminez la session "root"
+$ exit
+
 # Nous allons maintenant installer la dernière version de Tor
 $ sudo apt update
-$ sudo install tor deb.torproject.org-keyring
+$ sudo apt install tor deb.torproject.org-keyring
 ```
 
 Arrivé à cette étape, Tor devrait déjà être actif sur votre ordinateur.
