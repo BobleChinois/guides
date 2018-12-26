@@ -45,7 +45,7 @@ Empreinte de clef principale : BD59 9672 C804 AF27 7086  9A04 8B80 CD2B B8BD 81
 `$ sha256sum --check manifest-v0.5-beta.txt --ignore-missing`
 
 Maintenant que nous sommes sûrs que le fichier n'a pas été corrompu, nous pouvons l'extraire grâce à la commande `tar` :  
-`$ tar -xzf lnd-linux-amd64-v0.4.2-beta.tar.gz`
+`$ tar -xzf lnd-linux-amd64-v0.5-beta.tar.gz`
 
 Vérifier que le nouveau dossier a bien été créé :  
 `$ ls`
@@ -54,7 +54,7 @@ Puis installer LND (nous avons besoin de basculer sur l'utilisateur admin) :
 ```
 $ su [ADMIN]
 $ sudo install -m 0755 -o root -g root -t /usr/local/bin lnd-linux-arm-v0.5-beta/*
-$ lnd --version`
+$ lnd --version
 > lnd version 0.5.0-beta commit=3b2c807288b1b7f40d609533c1e96a510ac5fa6d
 $ exit
 ```
