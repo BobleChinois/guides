@@ -10,8 +10,6 @@
 
 *Difficulté: moyenne*
 
-TODO: Mettre à jour avec la version 1.6
-
 ### Introduction
 
 Le meilleur moyen de conserver vos bitcoins avec un bon compromis entre sécurité et accessibilité est d'utiliser un portefeuille _matériel_ (_hardware wallet_), comme [Ledger](https://www.ledgerwallet.com/) ou [Trezor](https://trezor.io/) en combinaison de votre nœud Bitcoin. En faisant ainsi, vous éliminez le besoin de passer par un tiers pour vérifier vos transactions.
@@ -58,7 +56,7 @@ Sur votre ordinateur habituel, commencez par installer Electrum.
 
 * Depuis votre ordinateur habituel, ouvrir une session via SSH avec l'utilisateur "bitcoin"  
   `$ ssh bitcoin@[VOTRE_IP]`  
-* Télécharger, vérifier et extraire la dernière release (voir [cette page](https://github.com/chris-belcher/electrum-personal-server/releases) pour voir quelle est la plus récente et obtenir le bon lien)  
+* Télécharger, vérifier et extraire la dernière release (voir [cette page](https://github.com/chris-belcher/electrum-personal-server/releases) pour vérifier quelle est la plus récente et obtenir le bon lien)  
 
   ```
   # créer un nouveau répertoire
@@ -66,8 +64,8 @@ Sur votre ordinateur habituel, commencez par installer Electrum.
   $ cd electrum-personal-server
   
   # télécharger le code et les signatures
-  $ wget https://github.com/chris-belcher/electrum-personal-server/archive/eps-v0.1.5.tar.gz
-  $ wget https://github.com/chris-belcher/electrum-personal-server/releases/download/eps-v0.1.5/eps-v0.1.5.tar.gz.asc
+  $ wget https://github.com/chris-belcher/electrum-personal-server/archive/eps-v0.1.7.tar.gz
+  $ wget https://github.com/chris-belcher/electrum-personal-server/releases/download/electrum-personal-server-v0.1.7/electrum-personal-server-v0.1.7.tar.gz.asc
   $ wget https://raw.githubusercontent.com/chris-belcher/electrum-personal-server/master/pgp/pubkeys/belcher.asc
   
   # vérifier la signature de Chris Belcher et l'intégrité du fichier téléchargé
@@ -75,25 +73,36 @@ Sur votre ordinateur habituel, commencez par installer Electrum.
   > 0A8B038F5E10CC2789BFCFFFEF734EA677F31129
   
   $ gpg --import belcher.asc
-  $ gpg --verify eps-v0.1.5.tar.gz.asc
-  >  gpg: Signature faite le ven. 07 sept. 2018 15:11:01 CEST
-  >  gpg:                avec la clef RSA EF734EA677F31129
-  >  gpg: Bonne signature de « Chris Belcher <false@email.com> » [inconnu]
-  >  Empreinte de clef principale : 0A8B 038F 5E10 CC27 89BF  CFFF EF73 4EA6 77F3 1129
-
+  $ gpg --verify electrum-personal-server-v0.1.7.tar.gz.asc
+> gpg: Signature made ven. 26 avril 2019 18:08:13 CEST
+> gpg:                using RSA key EF734EA677F31129
+> gpg: Good signature from "Chris Belcher <false@email.com>" [unknown]
+> gpg: WARNING: This key is not certified with a trusted signature!
+> gpg:          There is no indication that the signature belongs to the owner.
   
   # Décompresser le fichier
-  $ tar -xvf eps-v0.1.5.tar.gz  
-  
-  
-  ```
-* Renommer le dossier créé  
-`$ mv electrum-personal-server-eps-v0.1.5/ eps`
+  $ tar -xvf electrum-personal-server-v0.1.7.tar.gz    
+```
+* Créer un environnement virtuel Python
+```
+# entrer dans le nouveau dossier
+  $ cd electrum-personal-server-v0.1.7
 
+# créer et activer l'environnement virtuel
+  $ python3 -m venv venv
+  $ . venv/bin/activate
+```
+
+* Installer electrum personal server
+```
+  $ python setup.py build
+  $ python setup.py install
+```
 * Faire une copie du fichier de configuration ; l'ouvrir  
-  `$ cp config.cfg_sample config.cfg`  
-  `$ nano config.cfg` 
-
+```
+  $ cp config.ini_sample config.ini
+  $ nano config.ini 
+```
   * Ajouter la clé publique principale du portefeuille Electrum, ou les adresses en lecture seule (_watch only_) à suivre dans les sections `[master-public-keys]` et `[watch-only-addresses]`. La clé publique principale d'un portefeuille Electrum se trouve dans `Portefeuille` -> `Information`.
   
   ![thunderbadger_64_electrum1](images/64_electrum1.png)  
@@ -130,20 +139,10 @@ $ sudo systemctl restart ufw.service
 $ exit
 ```
 
-### Scan initial de la blockchain
+### Premier lancement
 
-Lors du premier lancement, le serveur doit d'abord générer les adresses à partir de la clé publique que vous avez fournie. Si vous avez déjà effectué des transactions avec ce portefeuille ou les adresses lectures seules que vous suivez, il faudra en plus scanner la blockchain pour retrouver toutes les transactions antérieures.
-
-* Démarrer le serveur pour générer les adresses à partir de la clé publique principale  
-  `$ ./server.py`
-  
-* Scanner la blockchain (cela peut prendre des heures si vous devez remonter très loin dans le temps, **inutile de le faire si vous utilisez des adresses qui n'ont jamais servi**)  
-  `$ ./rescan-script.py`
-
-[![initialize server and scan blockchain](images/60_eps_rescan.png)
-
-* Une fois la génération d'adresse (ou le scan le cas échéant) terminé, relancer le serveur  
- `$ ./server.py`
+* Démarrer le serveur 
+  `$ electrum-personal-server config.ini`
 
 ### Vérifier la connexion du portefeuille Electrum
 
