@@ -24,7 +24,7 @@ Une possibilité pour profiter d'une interface graphique plus agréable et du su
 
 Sur votre ordinateur habituel, commencez par installer Electrum.
 
-* Télécharger l'[installer Windows](https://download.electrum.org/3.2.3/electrum-3.2.3-setup.exe)  
+* Télécharger l'[installer Windows](https://electrum.org/#download)  
 
 * Lancer l'exécutable et suivez les instructions
 
@@ -64,7 +64,7 @@ Sur votre ordinateur habituel, commencez par installer Electrum.
   $ cd electrum-personal-server
   
   # télécharger le code et les signatures
-  $ wget https://github.com/chris-belcher/electrum-personal-server/archive/eps-v0.1.7.tar.gz
+  $ wget https://github.com/chris-belcher/electrum-personal-server/archive/electrum-personal-server-v0.1.7.tar.gz
   $ wget https://github.com/chris-belcher/electrum-personal-server/releases/download/electrum-personal-server-v0.1.7/electrum-personal-server-v0.1.7.tar.gz.asc
   $ wget https://raw.githubusercontent.com/chris-belcher/electrum-personal-server/master/pgp/pubkeys/belcher.asc
   
@@ -74,19 +74,19 @@ Sur votre ordinateur habituel, commencez par installer Electrum.
   
   $ gpg --import belcher.asc
   $ gpg --verify electrum-personal-server-v0.1.7.tar.gz.asc
-> gpg: Signature made ven. 26 avril 2019 18:08:13 CEST
-> gpg:                using RSA key EF734EA677F31129
-> gpg: Good signature from "Chris Belcher <false@email.com>" [unknown]
-> gpg: WARNING: This key is not certified with a trusted signature!
-> gpg:          There is no indication that the signature belongs to the owner.
+gpg: Signature made ven. 26 avril 2019 18:08:13 CEST
+gpg:                using RSA key EF734EA677F31129
+gpg: Good signature from "Chris Belcher <false@email.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
   
   # Décompresser le fichier
   $ tar -xvf electrum-personal-server-v0.1.7.tar.gz    
-```
+  ```
 * Créer un environnement virtuel Python
 ```
 # entrer dans le nouveau dossier
-  $ cd electrum-personal-server-v0.1.7
+  $ cd electrum-personal-server-electrum-personal-server-v0.1.7
 
 # créer et activer l'environnement virtuel
   $ python3 -m venv venv
