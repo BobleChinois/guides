@@ -141,7 +141,7 @@ $ exit
 
 ### Premier lancement
 
-* Démarrer le serveur 
+* Démarrer le serveur :  
   `(venv)$ electrum-personal-server config.ini`
 
 ### Vérifier la connexion du portefeuille Electrum
