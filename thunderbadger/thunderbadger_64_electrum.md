@@ -95,13 +95,13 @@ Sur votre ordinateur habituel, commencez par installer Electrum.
 
 * Installer electrum personal server
 ```
-  $ python setup.py build
-  $ python setup.py install
+  (venv)$ python setup.py build
+  (venv)$ python setup.py install
 ```
 * Faire une copie du fichier de configuration ; l'ouvrir  
 ```
-  $ cp config.ini_sample config.ini
-  $ nano config.ini 
+  (venv)$ cp config.ini_sample config.ini
+  (venv)$ nano config.ini 
 ```
   * Ajouter la clé publique principale du portefeuille Electrum, ou les adresses en lecture seule (_watch only_) à suivre dans les sections `[master-public-keys]` et `[watch-only-addresses]`. La clé publique principale d'un portefeuille Electrum se trouve dans `Portefeuille` -> `Information`.
   
@@ -142,7 +142,7 @@ $ exit
 ### Premier lancement
 
 * Démarrer le serveur 
-  `$ electrum-personal-server config.ini`
+  `(venv)$ electrum-personal-server config.ini`
 
 ### Vérifier la connexion du portefeuille Electrum
 
