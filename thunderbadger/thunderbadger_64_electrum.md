@@ -58,7 +58,7 @@ Sur votre ordinateur habituel, commencez par installer Electrum.
   `$ ssh bitcoin@[VOTRE_IP]`  
 * Télécharger, vérifier et extraire la dernière release (voir [cette page](https://github.com/chris-belcher/electrum-personal-server/releases) pour vérifier quelle est la plus récente et obtenir le bon lien)  
 
-  ```
+```
   # créer un nouveau répertoire
   $ mkdir electrum-personal-server
   $ cd electrum-personal-server
@@ -74,15 +74,15 @@ Sur votre ordinateur habituel, commencez par installer Electrum.
   
   $ gpg --import belcher.asc
   $ gpg --verify electrum-personal-server-v0.1.7.tar.gz.asc
-gpg: Signature made ven. 26 avril 2019 18:08:13 CEST
-gpg:                using RSA key EF734EA677F31129
-gpg: Good signature from "Chris Belcher <false@email.com>" [unknown]
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
+  >gpg: Signature made ven. 26 avril 2019 18:08:13 CEST
+  >gpg:                using RSA key EF734EA677F31129
+  >gpg: Good signature from "Chris Belcher <false@email.com>" [unknown]
+  >gpg: WARNING: This key is not certified with a trusted signature!
+  >gpg:          There is no indication that the signature belongs to the owner.
   
   # Décompresser le fichier
   $ tar -xvf electrum-personal-server-v0.1.7.tar.gz    
-  ```
+```
 * Créer un environnement virtuel Python
 ```
 # entrer dans le nouveau dossier
