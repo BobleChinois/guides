@@ -18,21 +18,22 @@ Maintenant, les choses sérieuses : télécharger, vérifier, et installer le fi
 `$ cd LND`
 
 Ensuite, téléchargez :
-* La dernière release stable de LND (0.5 au moment de la dernière révision de ce tuto, vous pouvez vérifier sur [cette page](https://github.com/lightningnetwork/lnd/releases)) :  
-`$ wget https://github.com/lightningnetwork/lnd/releases/download/v0.5-beta/lnd-linux-amd64-v0.5-beta.tar.gz`
+* La dernière release stable de LND (0.6.1 au moment de la dernière révision de ce tuto, vous pouvez vérifier sur [cette page](https://github.com/lightningnetwork/lnd/releases)) :  
+`$ wget https://github.com/lightningnetwork/lnd/releases/download/v0.6.1-beta/lnd-linux-amd64-v0.6.1-beta.tar.gz`
 
 * Les empreintes cryptographiques qui vont vous permettre de vérifier que le logiciel que vous avez téléchargé est bien identique à celui signé par les développeurs :  
-`$ sudo wget https://github.com/lightningnetwork/lnd/releases/download/v0.5-beta/manifest-v0.5-beta.txt`  
-`$ sudo wget https://github.com/lightningnetwork/lnd/releases/download/v0.5-beta/manifest-v0.5-beta.txt.sig`
+`$ wget https://github.com/lightningnetwork/lnd/releases/download/v0.6.1-beta/manifest-v0.6.1-beta.txt`  
+`$ wget https://github.com/lightningnetwork/lnd/releases/download/v0.6.1-beta/manifest-v0.6.1-beta.txt.sig`
 
 * La clé de Roasbeef, qui est le principal développeur du projet, ce qui permet de vérifier qu'il a bien signé le fichier :  
-`$ sudo wget https://keybase.io/roasbeef/pgp_keys.asc | gpg --import`
+`$ wget https://keybase.io/roasbeef/pgp_keys.asc | gpg --import`
 
 Nous pouvons alors vérifier l'origine et l'intégrité du fichier téléchargé :
 * D'abord en vérifiant la signature de la release :
-```$ gpg --verify manifest-v0.5-beta.txt.sig
-gpg: les données signées sont supposées être dans « manifest-v0.5-beta.txt »
-gpg: Signature faite le ven. 14 sept. 2018 02:51:12 CEST
+```
+$ gpg --verify manifest-v0.6.1-beta.txt.sig
+gpg: les données signées sont supposées être dans « manifest-v0.6.1-beta.txt »
+gpg: Signature faite le ven. 10 mai 2019 01:31:08 CEST
 gpg:                avec la clef RSA F8037E70C12C7A263C032508CE58F7F8E20FD9A2
 gpg: Bonne signature de « Olaoluwa Osuntokun <laolu32@gmail.com> » [inconnu]
 gpg: Attention : cette clef n'est pas certifiée avec une signature de confiance.
@@ -42,21 +43,17 @@ Empreinte de clef principale : BD59 9672 C804 AF27 7086  9A04 8B80 CD2B B8BD 81
 ```
 
 * Puis l'intégrité du fichier téléchargé en comparant le résultat de cette commande :  
-`$ sha256sum --check manifest-v0.5-beta.txt --ignore-missing`
+`$ sha256sum --check manifest-v0.6.1-beta.txt --ignore-missing`
 
 Maintenant que nous sommes sûrs que le fichier n'a pas été corrompu, nous pouvons l'extraire grâce à la commande `tar` :  
-`$ tar -xzf lnd-linux-amd64-v0.5-beta.tar.gz`
+`$ tar -xzf lnd-linux-amd64-v0.6.1-beta.tar.gz`
 
 Vérifier que le nouveau dossier a bien été créé :  
 `$ ls`
 
-Puis installer LND (nous avons besoin de basculer sur l'utilisateur admin) :  
+Puis installer LND : 
 ```
-$ su [ADMIN]
-$ sudo install -m 0755 -o root -g root -t /usr/local/bin lnd-linux-arm-v0.5-beta/*
-$ lnd --version
-> lnd version 0.5.0-beta commit=3b2c807288b1b7f40d609533c1e96a510ac5fa6d
-$ exit
+$ sudo install -m 0755 -o root -g root -t /usr/local/bin lnd-linux-arm-v0.6.1-beta/*
 ```
 
 ### Configuration de LND 
@@ -76,10 +73,6 @@ Copier/coller le texte ci-dessous :
 debuglevel=info
 debughtlc=true
 maxpendingchannels=5
-alias=Thunder_Badger [LND] 
-# il s'agit de votre pseudonyme sur le réseau Lightning, soyez créatif
-color=#68F442
-
 [Bitcoin]
 bitcoin.active=1
 
@@ -105,6 +98,7 @@ autopilot.allocation=0.6
 ### Initialisation du portefeuille LND
 
 Tout d'abord, nous devons nous assurer que Bitcoin Core a terminé sa synchronisation initiale :
+* Passer sur l'utilisateur bitcoin
 * Interroger `bitcoind` sur l'avancement de la synchronisation :  
 `$ bitcoin-cli getblockchaininfo`
 
@@ -145,7 +139,7 @@ Votre nœud Lightning est prêt. Pour jouer un peu sur le testnet, vous pouvez v
 `$ lncli --network=testnet newaddress np2wkh`  
 `> "address": "2NCoq9q7............dkuca5LzPXnJ9NQ"` 
 
-* Rendez-vous sur un [faucet](https://testnet.manu.backend.hamburg/faucet) et suivez les instructions. 
+* Rendez-vous sur un [faucet](https://coinfaucet.eu/en/btc-testnet/) pour obtenir des bitcoins de test. 
 
 * Vérifier le montant sur votre portefeuille.
 `$ lncli --network=testnet walletbalance`  
