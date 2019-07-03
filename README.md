@@ -1,3 +1,4 @@
+**Ce guide est archivé et ne sera plus maintenu, merci de consulter le guide à [cette adresse](https://github.com/BobleChinois/ThunderBadger)**
 # Cryptocurrency guides 
 by Stadicus
 
